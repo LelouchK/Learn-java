@@ -1,7 +1,26 @@
 package com.foldik.learn.intarray;
 
-/**
- * Created by foldi on 2016.09.13..
- */
+import com.foldik.learn.dependencyinjection.logger.Logger;
+import com.foldik.learn.dependencyinjection.module.AppModule;
+import com.google.inject.Guice;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class App {
+
+    public static void main(String[] args) {
+        Logger logger = getLogger();
+
+        List<String> names = new ArrayList<>();
+        names.add("Macska");
+        names.add("Kutya");
+
+        names.forEach(logger::log);
+    }
+
+    public static Logger getLogger() {
+        return Guice.createInjector(new AppModule()).getInstance(Logger.class);
+    }
+
 }
